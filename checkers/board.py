@@ -6,7 +6,7 @@ class Board:
     def __init__(self):
         # self.board = [[WHITE, 0 WHITE , 0 WHITE],[RED, 0 RED, 0, WHITE]]
         self.board = []
-        self.selected_piece = None
+        # self.selected_piece = None 
         self.red_left = self.white_left = 12
         self.red_kings = self.white_kings = 0
         self.create_board()
