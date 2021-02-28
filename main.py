@@ -48,7 +48,6 @@ def get_row_col_from_mouse(pos):
     x,y = pos
     row = y // SQUARE_SIZE
     col = x // SQUARE_SIZE
-    #pygame.draw.circle(game.win.self,constants.YELLOW, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
     return row, col
 
 def main():
@@ -70,14 +69,7 @@ def main():
             value, new_board = minimax(game.get_board(), difficultyLevel+1, WHITE, game)
             game.ai_move(new_board)
            
-        if game.winner() != None:
-            
-            if game.winner()==WHITE:
-                print("Winner is: White")            
-            else:
-                print ("Winner is Red")
-            if game.removed_counter==10:
-                print("Game Over - draw")
+        if game.winner() != None:            
             run = False
         
         for event in pygame.event.get():
@@ -89,17 +81,14 @@ def main():
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
                 game.select(row,col)
-                #pygame.draw.circle(game.win, (255,0,255), (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
         
             pos = pygame.mouse.get_pos()
             row, col = get_row_col_from_mouse(pos)
         if (difficultyLevel<3):
             game.update_board(row,col)
-            #pygame.draw.circle(game.win, (255,255,255), (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
         else:
             game.update3(row,col)
    
-    #TODO: add end game message!
     if game.winner()== WHITE:
         messagebox.showinfo("Game Over", "White is Winner")
     elif game.winner()== RED:

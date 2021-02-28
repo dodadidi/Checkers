@@ -41,7 +41,6 @@ class Game:
         """
         if self.selected:
             rectOne = (100,100,100,100)
-            #pygame.draw.rect(self.win, BLUE , rectOne)
             pygame.draw.circle(self.win, BLUE, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
             pygame.draw.circle(self.win, GRAY, (col * SQUARE_SIZE , row * SQUARE_SIZE ), 14)
             result = self.move(row,col) #try to move
@@ -51,11 +50,10 @@ class Game:
 
         piece = self.board.get_piece(row,col)
         
-        self.board.draw_selected(self.win,row,col)#draw.circle(self.win, YELLOW, (col-1 * SQUARE_SIZE + SQUARE_SIZE//2, row-1 * SQUARE_SIZE + SQUARE_SIZE//2), 8)
+        self.board.draw_selected(self.win,row,col)
         if piece != 0 and piece.color == self.turn:
             self.selected = piece
             self.valid_moves = self.board.get_valid_moves(piece)
-            print("\nvalid moves = ",self.valid_moves)
             if not self.valid_moves:
                 self._is_stuck("WHITE")
             return True
@@ -85,16 +83,10 @@ class Game:
         for move in moves:
             row, col = move
             pygame.draw.circle(self.win, BLUE, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
-            #pygame.draw.circle(self.win, YELLOW, (col-1 * SQUARE_SIZE + SQUARE_SIZE//2, row-1 * SQUARE_SIZE + SQUARE_SIZE//2), 8)
     def change_turn(self):
         self.valid_moves = {}
-        #print("Valid moves for RED = ", )
-        #valid_moves=self.board.get_valid_moves(self.board.piece)
         if self.turn == RED:
-            
             self.turn = WHITE
-            if not self.valid_moves:
-                print("Game Over, White Wins")
         else:
             self.turn = RED
 
@@ -104,5 +96,4 @@ class Game:
     def ai_move(self, board): #Since Game is a Controller class, it connects between the Board class (The View)
         # and  the Model- the Minimax Algorithm Class.
         self.board = board
-        #if (self.valid_moves)
         self.change_turn()

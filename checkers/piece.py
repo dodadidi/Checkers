@@ -21,27 +21,17 @@ class Piece:
     def change_to_king(self):
         self.king = True
     
-	#the following draws a piece on the board.
+	#draw piece as a circle with the right color and gray border at the middle of square
     def draw(self, win,selected):
-        """ 
-        draw piece as a circle with the right color and gray border at the middle of square
-        """
         radius = SQUARE_SIZE // 2 - self.PADDING
         pygame.draw.circle(win, self.color, (self.x, self.y), radius)
         if self.king:
             win.blit(CROWN, (self.x - CROWN.get_width()//2, self.y - CROWN.get_height()//2))
 
-    def move(self, row, col):
-        """
-        update piece curr_pos and call to calculate_curr_pos()
-        """
+    def move(self, row, col): # update piece curr_pos and call to calculate_curr_pos()
         self.row = row
         self.col = col
         self.calculate_curr_pos()
         
-    #def get_piece_color(self,row,col):
-     #   return self.color
-   
-#for debugging
     def __repr__(self):
         return str(self.color)

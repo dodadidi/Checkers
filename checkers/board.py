@@ -43,9 +43,7 @@ class Board:
                     pieces.append(piece)
         return pieces    
     
-    def draw_selected(self,win,row,col):
-      #  """A simple function that draws a yellow circle inside the chosen piece """
-        #if Piece.get_piece_color(self,row,col)==RED:
+    def draw_selected(self,win,row,col): #A simple function that draws a yellow circle inside the chosen piece 
         pygame.draw.circle(win, YELLOW, (col-1 * SQUARE_SIZE + SQUARE_SIZE//2, row-1 * SQUARE_SIZE + SQUARE_SIZE//2), 8)
 
     def move(self, piece, row, col):#this method handles an event of moving a piece, and if a piece becomes a king then it handles this case also.
@@ -65,7 +63,6 @@ class Board:
                 self.red_kings +=1
 
     def get_piece(self, row, col):#return a "piece" object according to its location on the board.
-        print("\ntype of self.board[row][col] = ", type(self.board[row][col]).__name__)
         return self.board[row][col]
 
     def create_board(self): #this function creates a  checkers board from zero.
@@ -102,10 +99,7 @@ class Board:
                     if row==row1 and col==col1:           
                         pygame.draw.circle(win, YELLOW, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
 
-    def draw3(self, win,row1,col1):
-        """
-        draw current board FOR DIFFICULTY LEVEL NUMBER 3
-        """
+    def draw3(self, win,row1,col1): #draw current board FOR DIFFICULTY LEVEL NUMBER 3
         self.draw_squares(win)
         for row in range(ROWS):
             for col in range(COLS):
@@ -121,10 +115,7 @@ class Board:
                     if row==row1 and col==col1:
                         pygame.draw.circle(win, YELLOW, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 8)
         
-    def remove(self, pieces):
-        """
-        when piece jump above opponent's piece; remove the opponent's piece and update square and pieces
-        """
+    def remove(self, pieces): #when piece jump above opponent's piece; remove the opponent's piece and update square and pieces
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
             if piece != 0: 
@@ -153,21 +144,13 @@ class Board:
         for i in range(8):
             for j in range(8):
                 curr_piece = self.get_piece(i,j)
-                print("\ncurr piece = ",curr_piece)
-                print("\n curr piece type = ",type(curr_piece).__name__)
-               # print("\npiece type =",type(Piece.WHITE).__name__)
                 if curr_piece!=0:
                     if curr_piece.color==WHITE:
                         all_white_pieces.append([i,j])
                         all_white_piece.append(curr_piece)
-                        print("\nall white pieces = ",all_white_pieces)
-                        print("\nall white pieces type = ",type(all_white_pieces).__name__)
                     elif curr_piece.color==RED:
                         all_red_pieces.append([i,j])
                         all_red_piece.append(curr_piece)
-                        print("\nall red pieces = ",all_red_pieces)
-                        print("\nall RED pieces type = ",type(all_red_pieces).__name__)
-                    #all(item in superset.items() for item in subset.items())
         all_red_valid_moves = []
         all_white_valid_moves = []
         tmp_piece = Piece.__init__
@@ -179,19 +162,11 @@ class Board:
             tmp_piece.color = RED
             tmp_piece.king = False
             all_red_valid_moves.append(self.get_valid_moves(tmp_piece)) # the valid (moved of all red pieces of the current board saved on this list
-            print("all red valid moves = ",all_red_valid_moves)
-            print("all red valid moves type = ",type(all_red_valid_moves).__name__)
         red_valid_moves_counter = 0
         for a in all_red_valid_moves:
             if bool(a):
                 red_valid_moves_counter +=1
-        #if len(all_red_valid_moves)==1 and not bool(all_red_valid_moves[0]):
-         #   print("\n\n WHITE WInS SINCE RED IS STUCK")
-          #  return WHIT` 
-          # E    
         if red_valid_moves_counter==0:
-            #showerror('Game OVer', 'WHITE WInS SINCE RED IS STUCK')
-            print("\n\n WHITE WInS SINCE RED IS STUCK")
             return PITCH
         for w in   range (len(all_white_piece)):
             tmp_row = all_white_pieces[w][0]
@@ -205,53 +180,13 @@ class Board:
         for a in all_white_valid_moves:
             if bool(a):
                 white_valid_moves_counter +=1
-        #if len(all_red_valid_moves)==1 and not bool(all_red_valid_moves[0]):
-         #   print("\n\n WHITE WInS SINCE RED IS STUCK")
-          #  return WHIT` 
-          # E    
         if white_valid_moves_counter==0:
-            #showerror('Game OVer', 'WHITE WInS SINCE RED IS STUCK')
-            print("\n\n RED WInS SINCE WHITE IS STUCK")
             return GRAY
         for i in range(8):
             for j in range(8):
                 curr_piece = self.get_piece(i,j)
-                print("\ncuur_piece = ",curr_piece)
-                #for piece in self.get_all_pieces(piece):
-                 #   print("\nself.get_Valid_moves(self.piece = ",self.get_valid_moves(piece))
-                #valid_moves_per_piece = self.get_valid_moves(curr_piece)
-                #if not valid_moves_per_piece and curr_piece=={(255,255,255)}:
-                #    print("No more valid moves for red")
-                #3\#    return WHITE
-                #elif not valid_moves_per_piece and curr_piece=={(255,0,0)}:
-                 #   print("No more valid moves for red")
-                  #  return RED'''
-        
         self.redMoves=0
         self.whiteMoves=0
-        '''for piece in all_red_pieces:
-            if piece.color==RED:
-                movesPerRedPiece = self.get_valid_moves(piece)
-                if movesPerRedPiece:
-                    self.redMoves=self.redMoves+1
-                    print ("\red Moves Array: ",movesPerRedPiece)
-                    print ("\red Moves now: ",self.redMoves)
-           
-            if self.redMoves==1:
-                #if not self.get_valid_moves(movesPerRedPiece.pop):
-                print("\n mocesPerRedPieceClass = ",type(movesPerRedPiece).__name__)
-                print("valid moves for red:",movesPerRedPiece)
-                for item in all_white_pieces:
-                    print("\n all white pieces = ",all_white_pieces)
-                if all(item in movesPerRedPiece.items() for item in all_white_pieces):
-                    print("moverPredRedPieceItems = ",movesPerRedPiece.items(),"all white piece = ",all_white_pieces)
-                    return WHITE
-        for piece in all_white_pieces:           
-            if piece.color==WHITE:
-                movesPerWPiece = self.get_valid_moves(piece)
-                if movesPerWPiece:
-                    self.whiteMoves=self.whiteMoves+1       
-                    print ("\nwhite Moves now: ",self.whiteMoves)'''
         return None
 		
     def get_valid_moves(self, piece): # for each piece return the valid moves it can make, and later on show them on the board.
